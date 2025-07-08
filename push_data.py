@@ -38,6 +38,7 @@ class MongoETL:
         """
         Convert CSV format into JSON format, to be able to upload to MongoDB.
         """
+        logging.info("Initiating format transformation from CSV to JSON for MongoDB")
         try:
             data = pd.read_csv(file_path)
             self.records = data.to_dict(orient="records")
@@ -47,13 +48,16 @@ class MongoETL:
 
     def push_data_to_mongodb(self):
         if self.records is None:
+            logging.error("No data to upload to MongoDB.")
             raise ValueError(
-                "No datato insert. Make sure to first call csv_to_json function."
+                "No data to insert. Make sure to first call csv_to_json function."
             )
         try:
             result = self.collection.insert_many(self.records)
+            logging.info("Data successfully uploaded to MongoDB.")
             return len(result.inserted_ids)
         except Exception as e:
+            logging.error("Something wen't wrong when trying to upload data to MongoDB")
             raise NetworkSecurityException(error_message=e, error_details=sys)
 
 

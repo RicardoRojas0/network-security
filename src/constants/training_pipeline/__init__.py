@@ -1,0 +1,25 @@
+import os
+import sys
+import numpy as np
+import pandas as pd
+
+"""
+COMMON CONSTANT VARIABLES FOR TRAINING PIPELINE
+"""
+TARGET_COLUMN: str = "Result"
+PIPELINE_NAME: str = "network-security"
+ARTIFACT_DIRECTORY: str = "artifacts"
+FILE_NAME: str = "phisingData.csv"
+TRAIN_FILE_NAME: str = "train.csv"
+TEST_FILE_NAME: str = "test.csv"
+
+
+"""
+DATA INGESTION RELATED CONSTANTS
+"""
+DATA_INGESTION_DATABASE_NAME: str = "machine_learning_db"
+DATA_INGESTION_COLLECTION_NAME: str = "phishing_data"
+DATA_INGESTION_DIRECTORY_NAME: str = "data_ingestion"
+DATA_INGESTION_FEATURE_STORE_DIRECTORY: str = "feature_store"
+DATA_INGESTION_INGESTED_DIRECTORY: str = "ingested"
+DATA_INGESTION_TRAIN_TEST_SPLIT_RATIO: float = 0.2
