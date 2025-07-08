@@ -1,5 +1,4 @@
 import sys
-from src.logging.logger import logging
 
 
 class NetworkSecurityException(Exception):
@@ -13,12 +12,3 @@ class NetworkSecurityException(Exception):
 
     def __str__(self):
         return f"Error ocurred in [{self.filename}], in line [{self.lineno}]. Error message: [{str(self.error_message)}]"
-
-
-if __name__ == "__main__":
-    try:
-        logging.info("Entered the try block")
-        a = 1 / 0
-        print("This will not be printed")
-    except Exception as e:
-        raise NetworkSecurityException(error_message=e, error_details=sys)
