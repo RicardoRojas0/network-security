@@ -1,11 +1,7 @@
-import os
-import sys
-import numpy as np
-import pandas as pd
-
 """
 COMMON CONSTANT VARIABLES FOR TRAINING PIPELINE
 """
+
 TARGET_COLUMN: str = "Result"
 PIPELINE_NAME: str = "network-security"
 ARTIFACT_DIRECTORY: str = "artifacts"
