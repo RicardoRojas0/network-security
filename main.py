@@ -19,4 +19,4 @@ if __name__ == "__main__":
 
     except Exception as e:
         logging.error("Something failed in the Data Ingestion Process")
-        raise NetworkSecurityException(error_message=e, error_details=sys)
+        raise NetworkSecurityException(error_message=e)

@@ -58,7 +58,7 @@ class MongoETL:
             return len(result.inserted_ids)
         except Exception as e:
             logging.error("Something wen't wrong when trying to upload data to MongoDB")
-            raise NetworkSecurityException(error_message=e, error_details=sys)
+            raise NetworkSecurityException(error_message=e)
 
 
 if __name__ == "__main__":

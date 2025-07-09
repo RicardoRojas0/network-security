@@ -23,7 +23,7 @@ class DataIngestion:
         try:
             self.data_ingestion_config = data_ingestion_config
         except Exception as e:
-            raise NetworkSecurityException(error_message=e, error_details=sys)
+            raise NetworkSecurityException(error_message=e)
 
     def import_collection_as_dataframe(self):
         """
@@ -42,7 +42,7 @@ class DataIngestion:
             dataframe = dataframe.replace({"na": np.nan})
             return dataframe
         except Exception as e:
-            raise NetworkSecurityException(error_message=e, error_details=sys)
+            raise NetworkSecurityException(error_message=e)
 
     def export_data_into_feature_store(self, dataframe: pd.DataFrame):
         """
@@ -55,7 +55,7 @@ class DataIngestion:
             dataframe.to_csv(feature_store_file_path, index=False, header=True)
             return dataframe
         except Exception as e:
-            raise NetworkSecurityException(error_message=e, error_details=sys)
+            raise NetworkSecurityException(error_message=e)
 
     def split_data_train_test(self, dataframe: pd.DataFrame):
         try:
@@ -85,7 +85,7 @@ class DataIngestion:
             logging.info("Successfully exported train and test sets to path")
 
         except Exception as e:
-            raise NetworkSecurityException(error_message=e, error_details=sys)
+            raise NetworkSecurityException(error_message=e)
 
     def initiate_data_ingestion(self):
         try:
@@ -98,4 +98,4 @@ class DataIngestion:
             )
             return data_ingestion_artifact
         except Exception as e:
-            raise NetworkSecurityException(error_message=e, error_details=sys)
+            raise NetworkSecurityException(error_message=e)
