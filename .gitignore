@@ -209,4 +209,5 @@ __marimo__/
 # Specific to the project
 data/
 artifacts/
+logs/
 test_mongodb.py
