@@ -2,6 +2,7 @@ import os
 import sys
 import pandas as pd
 import numpy as np
+import mlflow
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -36,6 +37,24 @@ class ModelTrainer:
         try:
             self.model_trainer_config = model_trainer_config
             self.data_transformation_artifact = data_transformation_artifact
+        except Exception as e:
+            raise NetworkSecurityException(error_message=e)
+
+    def track_mlflow(self, best_model, classification_metric):
+        try:
+            with mlflow.start_run():
+                precision_score = classification_metric.precision_score
+                recall_score = classification_metric.recall_score
+                f1_score = classification_metric.f1_score
+
+                mlflow.log_metrics(
+                    {
+                        "precision_score": precision_score,
+                        "recall_score": recall_score,
+                        "f1_score": f1_score,
+                    }
+                )
+                mlflow.sklearn.log_model(sk_model=best_model, name="model")
         except Exception as e:
             raise NetworkSecurityException(error_message=e)
 
@@ -104,6 +123,17 @@ class ModelTrainer:
             model_directory = os.path.dirname(
                 self.model_trainer_config.trained_model_file_path
             )
+
+            self.track_mlflow(
+                best_model=best_model,
+                classification_metric=classification_train_metric,
+            )
+
+            self.track_mlflow(
+                best_model=best_model,
+                classification_metric=classification_test_metric,
+            )
+
             os.makedirs(model_directory, exist_ok=True)
 
             model = ModelEstimator(preprocessor=preprocessor, model=best_model)

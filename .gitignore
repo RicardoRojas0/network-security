@@ -210,4 +210,5 @@ __marimo__/
 data/
 artifacts/
 logs/
+mlruns/
 test_mongodb.py
