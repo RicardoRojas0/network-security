@@ -1,11 +1,13 @@
 from src.components.data_ingestion import DataIngestion
 from src.components.data_validation import DataValidation
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
 from src.entity.config_entity import (
     TrainingPipelineConfig,
     DataIngestionConfig,
     DataValidationConfig,
     DataTransformationConfig,
+    ModelTrainerConfig,
 )
 from src.exception.exception import NetworkSecurityException
 from src.logging.logger import logging
@@ -22,6 +24,9 @@ if __name__ == "__main__":
             training_pipeline_config=training_pipeline_config
         )
         data_transformation_config = DataTransformationConfig(
+            training_pipeline_config=training_pipeline_config
+        )
+        model_trainer_config = ModelTrainerConfig(
             training_pipeline_config=training_pipeline_config
         )
 
@@ -53,6 +58,16 @@ if __name__ == "__main__":
         )
         print(data_transformation_artifact)
         logging.info("=== DATA TRANSFORMATION PROCESS COMPLETED ===")
+
+        # Model Trainer
+        logging.info("=== INITIATING MODEL TRAINING PROCESS ===")
+        model_trainer = ModelTrainer(
+            model_trainer_config=model_trainer_config,
+            data_transformation_artifact=data_transformation_artifact,
+        )
+        model_trainer_artifact = model_trainer.initiate_model_trainer()
+        print(model_trainer_artifact)
+        logging.info("=== MODEL TRAINING PROCESS COMPLETED ===")
 
     except Exception as e:
         logging.error("Something failed in the Data Ingestion Process")
