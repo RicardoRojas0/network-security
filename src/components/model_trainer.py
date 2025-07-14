@@ -142,6 +142,12 @@ class ModelTrainer:
                 file_path=self.model_trainer_config.trained_model_file_path,
                 preprocessor=model,
             )
+            
+            save_preprocessor(
+                file_path="models/model.pkl",
+                preprocessor=best_model,
+                
+            )
 
             model_trainer_artifact = ModelTrainerArtifact(
                 trained_model_file_path=self.model_trainer_config.trained_model_file_path,

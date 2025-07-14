@@ -211,4 +211,6 @@ data/
 artifacts/
 logs/
 mlruns/
+predictions/
+templates/
 test_mongodb.py

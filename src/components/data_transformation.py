@@ -100,6 +100,11 @@ class DataTransformation:
                 preprocessor=preprocessor,
             )
 
+            save_preprocessor(
+                file_path="models/preprocessor.pkl",
+                preprocessor=preprocessor,
+            )
+
             data_transformation_artifact = DataTransformationArtifact(
                 transformed_train_file_path=self.data_transformation_config.transformed_train_file_path,
                 transformed_test_file_path=self.data_transformation_config.transformed_test_file_path,
